@@ -1,0 +1,28 @@
+{
+  "name": "my-js-algorithms",
+  "version": "0.0.1",
+  "description": "javascript algorithms typescript",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.36.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiaoguanwen/my-js-algorithms.git"
+  },
+  "keywords": [
+    "javascript",
+    "algorithms",
+    "typescript"
+  ],
+  "author": "Guanwen Jiao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiaoguanwen/my-js-algorithms/issues"
+  },
+  "homepage": "https://github.com/jiaoguanwen/my-js-algorithms#readme"
+}
