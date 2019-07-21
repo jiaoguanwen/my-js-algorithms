@@ -6,7 +6,7 @@ export default class LinkedList {
   private tail: LinkedListNode;
   private compare: Comparator;
 
-  constructor(comparatorFunction: (a: any, b: any) => number) {
+  constructor(comparatorFunction?: (a: any, b: any) => number) {
     this.head = null;
     this.tail = null;
     this.compare = new Comparator(comparatorFunction);
