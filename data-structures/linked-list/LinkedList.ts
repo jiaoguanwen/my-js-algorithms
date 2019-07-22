@@ -33,7 +33,7 @@ export default class LinkedList {
     return this;
   }
 
-  public find({ value = undefined, callback = undefined }: { value: any; callback: Function }): LinkedListNode {
+  public find({ value = undefined, callback = undefined }: { value: any; callback?: Function }): LinkedListNode {
     if (!this.head) {
       return null;
     }
@@ -48,5 +48,29 @@ export default class LinkedList {
       currentNode = currentNode.next;
     }
     return null;
+  }
+
+  public delete(value: any): LinkedListNode {
+    if (!this.head) {
+      return null;
+    }
+    let deletedNode = null;
+    while (this.head && this.compare.equal(this.head.value, value)) {
+      deletedNode = this.head;
+      this.head = this.head.next;
+    }
+    let currentNode = this.head;
+    while (currentNode.next) {
+      if (this.compare.equal(currentNode.next.value, value)) {
+        deletedNode = currentNode.next;
+        currentNode.next = currentNode.next.next;
+      } else {
+        currentNode = currentNode.next;
+      }
+    }
+    if (this.compare.equal(this.tail.value, value)) {
+      this.tail = currentNode;
+    }
+    return deletedNode;
   }
 }

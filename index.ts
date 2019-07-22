@@ -9,4 +9,7 @@ ll.prepend(18);
 ll.prepend([1, 2, 3]);
 ll.append('jiaoguanwen');
 
+console.log(ll.find({ value: 9 }));
+console.log(ll.delete(18));
+
 console.log(ll);
