@@ -13,3 +13,5 @@ console.log(ll.find({ value: 9 }));
 console.log(ll.delete(18));
 
 console.log(ll);
+console.log(ll.deleteTail());
+console.log(ll);

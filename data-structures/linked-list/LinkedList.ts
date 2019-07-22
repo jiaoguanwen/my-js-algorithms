@@ -22,7 +22,7 @@ export default class LinkedList {
   }
 
   public append(value: any): LinkedList {
-    const newNode = new LinkedListNode(value);
+    const newNode = new LinkedListNode(value, null);
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
@@ -64,6 +64,8 @@ export default class LinkedList {
       if (this.compare.equal(currentNode.next.value, value)) {
         deletedNode = currentNode.next;
         currentNode.next = currentNode.next.next;
+        // cut the link between the deleteNode and its nexts
+        deletedNode.next = null;
       } else {
         currentNode = currentNode.next;
       }
@@ -72,5 +74,24 @@ export default class LinkedList {
       this.tail = currentNode;
     }
     return deletedNode;
+  }
+
+  public deleteTail(): LinkedListNode {
+    const deletedTail = this.tail;
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+      return deletedTail;
+    }
+    let currentNode = this.head;
+    while (currentNode.next) {
+      if (!currentNode.next.next) {
+        currentNode.next = null;
+      } else {
+        currentNode = currentNode.next;
+      }
+    }
+    this.tail = currentNode;
+    return deletedTail;
   }
 }
