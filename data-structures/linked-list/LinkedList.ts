@@ -1,5 +1,5 @@
-import LinkedListNode from './LinkedListNode';
-import Comparator from '../../utils/comparator/Comparator';
+import LinkedListNode from "./LinkedListNode";
+import Comparator from "../../utils/comparator/Comparator";
 
 export default class LinkedList {
   private head: LinkedListNode;
@@ -93,5 +93,60 @@ export default class LinkedList {
     }
     this.tail = currentNode;
     return deletedTail;
+  }
+
+  public deleteHead(): LinkedListNode {
+    if (!this.head) {
+      return null;
+    }
+    const deletedHead = this.head;
+    if (this.head.next) {
+      this.head = this.head.next;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
+    return deletedHead;
+  }
+
+  public fromArray(values: Array<any>): LinkedList {
+    values.forEach(value => this.append(value));
+    return this;
+  }
+
+  public toArray(): Array<LinkedListNode> {
+    const nodes: Array<LinkedListNode> = [];
+    let currentNode = this.head;
+    while (currentNode) {
+      nodes.push(currentNode);
+      currentNode = currentNode.next;
+    }
+    return nodes;
+  }
+
+  public toString(callback: Function): string {
+    return this.toArray()
+      .map(node => node.toString(callback))
+      .toString();
+  }
+
+  public reverse(): LinkedList {
+    /* return this.fromArray(
+      this.toArray()
+        .map(node => node.value)
+        .reverse()
+    ); */
+    let currNode = this.head;
+    let prevNode = null;
+    let nextNode = null;
+    while (currNode) {
+      nextNode = currNode.next;
+      currNode.next = prevNode;
+      prevNode = currNode;
+      currNode = nextNode;
+    }
+    this.tail = this.head;
+    this.head = prevNode;
+    return this;
   }
 }
