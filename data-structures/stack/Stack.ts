@@ -1,7 +1,7 @@
 import LinkedList from "../linked-list/LinkedList";
 
-// FIFO
-export default class Queue {
+// LIFO
+export default class Stack {
   private linkedList: LinkedList;
 
   constructor() {
@@ -13,22 +13,23 @@ export default class Queue {
   }
 
   public peek(): any {
-    /* if (this.isEmpty()) {
-      return null;
-    } */
-    if (!this.linkedList.head) {
+    if (this.isEmpty()) {
       return null;
     }
     return this.linkedList.head.value;
   }
 
-  public enqueue(value: any): void {
-    this.linkedList.append(value);
+  public push(value: any): void {
+    this.linkedList.prepend(value);
   }
 
-  public dequeue(): any {
+  public pop(): any {
     const removedHead = this.linkedList.deleteHead();
     return removedHead ? removedHead.value : null;
+  }
+
+  public toArray(): Array<any> {
+    return this.linkedList.toArray().map(linkedListNode => linkedListNode.value);
   }
 
   public toString(callback: Function): string {
