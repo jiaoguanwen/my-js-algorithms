@@ -1,5 +1,5 @@
-import DoublyLinkedListNode from "./DoublyLinkedListNode";
-import Comparator from "../../utils/comparator/Comparator";
+import DoublyLinkedListNode from './DoublyLinkedListNode';
+import Comparator from '../../utils/comparator/Comparator';
 
 export default class DoublyLinkedList {
   private head: DoublyLinkedListNode | null = null;
@@ -133,5 +133,74 @@ export default class DoublyLinkedList {
       currentNode = currentNode.next;
     }
     return null;
+  }
+
+  public deleteTail(): DoublyLinkedListNode | null {
+    if (!this.tail) {
+      return null;
+    }
+    if (this.head === this.tail) {
+      const deleteTail = this.tail;
+      this.head = null;
+      this.tail = null;
+      return deleteTail;
+    }
+    const deleteTail = this.tail;
+    this.tail = this.tail.previous;
+    this.tail.next = null;
+    return deleteTail;
+  }
+
+  public deleteHead(): DoublyLinkedListNode | null {
+    if (!this.head) {
+      return null;
+    }
+    const deleteHead = this.head;
+    if (this.head.next) {
+      this.head = this.head.next;
+      this.head.previous = null;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
+    return deleteHead;
+  }
+
+  public toArray(): Array<any> {
+    let nodes: Array<any> = [];
+    let currentNode = this.head;
+    while (currentNode) {
+      nodes.push(currentNode.value);
+      currentNode = currentNode.next;
+    }
+    return nodes;
+  }
+
+  public fromArray(values: Array<any>): DoublyLinkedList {
+    values.forEach(value => this.append(value));
+    return this;
+  }
+
+  public toString(callback: Function): string {
+    return this.toArray()
+      .map(node => node.toString(callback))
+      .toString();
+  }
+
+  reverse(): DoublyLinkedList {
+    let currNode = this.head;
+    let prevNode = null;
+    let nextNode = null;
+    while (currNode) {
+      nextNode = currNode.next;
+      prevNode = currNode.previous;
+      currNode.next = prevNode;
+      currNode.previous = nextNode;
+      prevNode = currNode;
+      currNode = nextNode;
+    }
+    this.tail = this.head;
+    this.head = prevNode;
+    return this;
   }
 }
