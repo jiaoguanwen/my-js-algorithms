@@ -2,8 +2,8 @@ import LinkedListNode from "./LinkedListNode";
 import Comparator from "../../utils/comparator/Comparator";
 
 export default class LinkedList {
-  private head: LinkedListNode;
-  private tail: LinkedListNode;
+  public head: LinkedListNode;
+  public tail: LinkedListNode;
   private compare: Comparator;
 
   constructor(comparatorFunction?: (a: any, b: any) => number) {
