@@ -33,7 +33,7 @@ export default class LinkedList {
     return this;
   }
 
-  public find({ value = undefined, callback = undefined }: { value: any; callback?: Function }): LinkedListNode {
+  public find({ value = undefined, callback = undefined }: { value?: any; callback?: Function }): LinkedListNode {
     if (!this.head) {
       return null;
     }

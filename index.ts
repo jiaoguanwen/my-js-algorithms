@@ -17,7 +17,7 @@ console.log(ll.deleteTail());
 console.log(ll);
  */
 
-import DoublyLinkedList from "./data-structures/doubly-linked-list/DoublyLinkedList";
+/* import DoublyLinkedList from "./data-structures/doubly-linked-list/DoublyLinkedList";
 import DoublyLinkedListNode from "./data-structures/doubly-linked-list/DoublyLinkedListNode";
 
 const ll = new DoublyLinkedList();
@@ -29,4 +29,18 @@ ll.append(4);
 ll.append(5);
 ll.delete(5);
 
-console.log(ll);
+console.log(ll); */
+
+import HashTable from './data-structures/hash-table/HashTable';
+
+const hashTable = new HashTable(3);
+
+hashTable.set('jiao', 'jiao');
+hashTable.set('guanwen', 1);
+hashTable.set('code', { name: 'javascript' });
+
+console.log(hashTable.get('jiao'));
+console.log(hashTable.get('code'));
+console.log(hashTable.get('guanwen'));
+
+console.log(hashTable);

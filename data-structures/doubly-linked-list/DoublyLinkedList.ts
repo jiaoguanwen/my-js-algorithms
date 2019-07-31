@@ -102,7 +102,7 @@ export default class DoublyLinkedList {
     return deletedNode;
   }
 
-  public find(value: any, callback?: Function): DoublyLinkedListNode | null {
+  public find(value?: any, callback?: Function): DoublyLinkedListNode | null {
     /* if (!this.head) {
       return null;
     }
