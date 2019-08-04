@@ -56,10 +56,108 @@ export default class Heap {
     this.heapContainer[indexOne] = tmp;
   }
 
-  private peek(): any {
+  public peek(): any {
     if (this.heapContainer.length === 0) {
       return null;
     }
     return this.heapContainer[0];
+  }
+
+  public poll(): any {
+    if (this.heapContainer.length === 0) {
+      return null;
+    }
+    if (this.heapContainer.length === 1) {
+      return this.heapContainer.pop();
+    }
+    const item = this.heapContainer[0];
+    this.heapContainer[0] = this.heapContainer.pop();
+    this.heapifyDown();
+    return item;
+  }
+
+  public add(item: any): Heap {
+    this.heapContainer.push(item);
+    this.heapifyUp();
+    return this;
+  }
+
+  public remove(item: any, comparator: Comparator = this.compare): Heap {
+    const numberOfItemsToRemove = this.find(item, comparator).length;
+    for (let iteration = 0; iteration < numberOfItemsToRemove; iteration += 1) {
+      const indexToRemove = this.find(item, comparator).pop();
+      if (indexToRemove === this.heapContainer.length - 1) {
+        this.heapContainer.pop();
+      } else {
+        this.heapContainer[indexToRemove] = this.heapContainer.pop();
+        const parentItem = this.parent(indexToRemove);
+        // TODO Need more time to understand here
+        if (
+          this.hasLeftChild(indexToRemove) &&
+          (!parentItem || this.pairIsInCorrectOrder(parentItem, this.heapContainer[indexToRemove]))
+        ) {
+          this.heapifyDown(indexToRemove);
+        } else {
+          this.heapifyUp(indexToRemove);
+        }
+      }
+    }
+    return this;
+  }
+
+  public find(item: any, comparator: Comparator = this.compare): Array<number> {
+    const foundItemIndices = [];
+    for (let itemIndex = 0; itemIndex < this.heapContainer.length; itemIndex += 1) {
+      if (comparator.equal(item, this.heapContainer[itemIndex])) {
+        foundItemIndices.push(itemIndex);
+      }
+    }
+    return foundItemIndices;
+  }
+
+  private heapifyUp(customStartIndex?: number) {
+    let currentIndex = customStartIndex || this.heapContainer.length - 1;
+    while (
+      this.hasParent(currentIndex) &&
+      !this.pairIsInCorrectOrder(this.parent(currentIndex), this.heapContainer[currentIndex])
+    ) {
+      this.swap(currentIndex, this.getParentIndex(currentIndex));
+      currentIndex = this.getParentIndex(currentIndex);
+    }
+  }
+
+  public isEmpty(): boolean {
+    return !this.heapContainer.length;
+  }
+
+  public toString(): string {
+    return this.heapContainer.toString();
+  }
+
+  private heapifyDown(customStartIndex: number = 0) {
+    let currentIndex = customStartIndex;
+    let nextIndex = null;
+    while (this.hasLeftChild(currentIndex)) {
+      if (
+        this.hasRightChild(currentIndex) &&
+        this.pairIsInCorrectOrder(this.rightChild(currentIndex), this.leftChild(currentIndex))
+      ) {
+        nextIndex = this.getRightChildIndex(currentIndex);
+      } else {
+        nextIndex = this.getLeftChildIndex(currentIndex);
+      }
+      if (this.pairIsInCorrectOrder(this.heapContainer[currentIndex], this.heapContainer[nextIndex])) {
+        break;
+      }
+      this.swap(currentIndex, nextIndex);
+      currentIndex = nextIndex;
+    }
+  }
+
+  private pairIsInCorrectOrder(firstElement: any, secondElement: any): boolean {
+    throw new Error(`
+      You have to implement heap pair comparision method
+      for ${firstElement} and ${secondElement} values.
+    `);
   }
 }
