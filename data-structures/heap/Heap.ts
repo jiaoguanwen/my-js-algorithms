@@ -56,6 +56,44 @@ export default class Heap {
     this.heapContainer[indexOne] = tmp;
   }
 
+  private heapifyUp(customStartIndex?: number) {
+    let currentIndex = customStartIndex || this.heapContainer.length - 1;
+    while (
+      this.hasParent(currentIndex) &&
+      !this.pairIsInCorrectOrder(this.parent(currentIndex), this.heapContainer[currentIndex])
+    ) {
+      this.swap(currentIndex, this.getParentIndex(currentIndex));
+      currentIndex = this.getParentIndex(currentIndex);
+    }
+  }
+
+  private heapifyDown(customStartIndex: number = 0) {
+    let currentIndex = customStartIndex;
+    let nextIndex = null;
+    while (this.hasLeftChild(currentIndex)) {
+      if (
+        this.hasRightChild(currentIndex) &&
+        this.pairIsInCorrectOrder(this.rightChild(currentIndex), this.leftChild(currentIndex))
+      ) {
+        nextIndex = this.getRightChildIndex(currentIndex);
+      } else {
+        nextIndex = this.getLeftChildIndex(currentIndex);
+      }
+      if (this.pairIsInCorrectOrder(this.heapContainer[currentIndex], this.heapContainer[nextIndex])) {
+        break;
+      }
+      this.swap(currentIndex, nextIndex);
+      currentIndex = nextIndex;
+    }
+  }
+
+  protected pairIsInCorrectOrder(firstElement: any, secondElement: any): boolean {
+    throw new Error(`
+      You have to implement heap pair comparision method
+      for ${firstElement} and ${secondElement} values.
+    `);
+  }
+
   public peek(): any {
     if (this.heapContainer.length === 0) {
       return null;
@@ -115,49 +153,11 @@ export default class Heap {
     return foundItemIndices;
   }
 
-  private heapifyUp(customStartIndex?: number) {
-    let currentIndex = customStartIndex || this.heapContainer.length - 1;
-    while (
-      this.hasParent(currentIndex) &&
-      !this.pairIsInCorrectOrder(this.parent(currentIndex), this.heapContainer[currentIndex])
-    ) {
-      this.swap(currentIndex, this.getParentIndex(currentIndex));
-      currentIndex = this.getParentIndex(currentIndex);
-    }
-  }
-
   public isEmpty(): boolean {
     return !this.heapContainer.length;
   }
 
   public toString(): string {
     return this.heapContainer.toString();
-  }
-
-  private heapifyDown(customStartIndex: number = 0) {
-    let currentIndex = customStartIndex;
-    let nextIndex = null;
-    while (this.hasLeftChild(currentIndex)) {
-      if (
-        this.hasRightChild(currentIndex) &&
-        this.pairIsInCorrectOrder(this.rightChild(currentIndex), this.leftChild(currentIndex))
-      ) {
-        nextIndex = this.getRightChildIndex(currentIndex);
-      } else {
-        nextIndex = this.getLeftChildIndex(currentIndex);
-      }
-      if (this.pairIsInCorrectOrder(this.heapContainer[currentIndex], this.heapContainer[nextIndex])) {
-        break;
-      }
-      this.swap(currentIndex, nextIndex);
-      currentIndex = nextIndex;
-    }
-  }
-
-  private pairIsInCorrectOrder(firstElement: any, secondElement: any): boolean {
-    throw new Error(`
-      You have to implement heap pair comparision method
-      for ${firstElement} and ${secondElement} values.
-    `);
   }
 }
