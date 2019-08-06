@@ -2,7 +2,7 @@ import Comparator from '../../utils/comparator/Comparator';
 
 export default class Heap {
   private heapContainer: Array<any>;
-  private compare: Comparator;
+  protected compare: Comparator;
 
   constructor(comparatorFunction: (a: any, b: any) => number) {
     if (new.target === Heap) {
