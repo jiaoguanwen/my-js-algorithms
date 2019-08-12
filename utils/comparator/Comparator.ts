@@ -5,7 +5,7 @@ export default class Comparator {
     this.compare = compareFunction;
   }
 
-  static defaultCompareFunction(a: string | number, b: string | number) {
+  static defaultCompareFunction(a: string | number, b: string | number): number {
     if (a === b) {
       return 0;
     }

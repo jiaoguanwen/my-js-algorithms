@@ -4,7 +4,7 @@ export default class Heap {
   private heapContainer: Array<any>;
   protected compare: Comparator;
 
-  constructor(comparatorFunction: (a: any, b: any) => number) {
+  constructor(comparatorFunction?: (a: any, b: any) => number) {
     if (new.target === Heap) {
       throw new TypeError('Cannot construt Heap instance directly');
     }
