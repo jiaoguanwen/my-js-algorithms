@@ -31,7 +31,7 @@ ll.delete(5);
 
 console.log(ll); */
 
-import HashTable from './data-structures/hash-table/HashTable';
+import HashTable from './src/data-structures/hash-table/HashTable';
 
 const hashTable = new HashTable(3);
 

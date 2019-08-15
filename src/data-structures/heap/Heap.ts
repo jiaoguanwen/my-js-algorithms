@@ -1,4 +1,4 @@
-import Comparator from '../../utils/comparator/Comparator';
+import Comparator from '../../../utils/comparator/Comparator';
 
 export default class Heap {
   private heapContainer: Array<any>;
