@@ -31,7 +31,7 @@ ll.delete(5);
 
 console.log(ll); */
 
-import HashTable from './src/data-structures/hash-table/HashTable';
+/* import HashTable from './src/data-structures/hash-table/HashTable';
 
 const hashTable = new HashTable(3);
 
@@ -43,4 +43,11 @@ console.log(hashTable.get('jiao'));
 console.log(hashTable.get('code'));
 console.log(hashTable.get('guanwen'));
 
-console.log(hashTable);
+console.log(hashTable); */
+
+import QuickSort from './src/algorithms/sorting/quick-sort/QuickSort';
+
+const quickSort = new QuickSort();
+console.log(new Date().getTime());
+console.log(quickSort.sort([1, 2, 6, 4, 2, 4, 6, 7]));
+console.log(new Date().getTime());
